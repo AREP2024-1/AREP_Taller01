@@ -5,13 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Optional;
 
 import edu.eci.arep.ASE.app.http.HTTPConnection;
 import edu.eci.arep.ASE.app.services.ReadFile;
 
 public class HTTPServer {
 
+    /*
+     * Inicia el servidor HTTP en el puerto 35000 y maneja las solicitudes entrantes.
+     * Crea una instancia de la clase HTTPConnection para establecer una conexión con la API.
+     * @throws IOException Si hay algún error de entrada/salida durante la ejecución.
+     */
     public static void main(String[] args) throws IOException {
         HTTPConnection httpConnection = new HTTPConnection("https://www.omdbapi.com/", "d91dcd3");
         

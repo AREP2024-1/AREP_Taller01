@@ -5,16 +5,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HTTPConnection {
 
     private static final String USER_AGENT = "Mozilla/5.0";
     private final String apiUrl;
     private final String apiKey;
-    private static final Map<String, String> cache = new HashMap<>();
+    private static final Map<String, String> cache = new ConcurrentHashMap();
 
+    /*
+     * Construye una instancia de la clase HTTPConnection con la URL de la API y la clave API proporcionadas.
+     * @param apiUrl La URL de la API a la que nos vamos a conectar.
+     * @param apiKey La clave API.
+     */
     public HTTPConnection(String apiUrl, String apiKey) {
         this.apiUrl = apiUrl;
         this.apiKey = apiKey;
@@ -28,6 +33,11 @@ public class HTTPConnection {
         return apiKey;
     }
 
+    /*
+     * Proporcina la informacion de la pelicula que se desea buscar.
+     * @param queryTitleMovie Título de la película que se va a buscar.
+     * @return Informacion de la pelicula buscada .
+     */
     public String getDatosPelicula(String queryTitleMovie) throws IOException {
 
         URL obj = new URL(apiUrl+"?apikey="+apiKey+"&t="+queryTitleMovie);
@@ -60,6 +70,12 @@ public class HTTPConnection {
         return null;
     }
 
+    /*
+     * Proporciona la informacion de la pelicula que se desea buscar, si esta no se encuentra en el cache, 
+     * la busca en la API y la guarda en el cache.
+     * @param queryMovie Título de la película que se va a buscar.
+     * @return Informacion de la pelicula buscada.
+     */
     public String cacheMovie(String queryMovie) throws IOException {
         if(!cache.containsKey(queryMovie)){
             String movieData = getDatosPelicula(queryMovie);

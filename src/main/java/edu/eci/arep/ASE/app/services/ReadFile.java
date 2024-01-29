@@ -13,6 +13,11 @@ import edu.eci.arep.ASE.app.http.HTTPConnection;
 
 public class ReadFile {
 
+    /*
+     * Lee el archivo index.html y lo envia al cliente.
+     * @param Socket del cliente al que se enviarán los datos de la película..
+     * @throws IOException Si hay algún error de entrada/salida durante la ejecución.
+     */
     public void  lecturaArchivo(Socket clientSocket) throws IOException{
 
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -33,6 +38,13 @@ public class ReadFile {
         bufferedReader.close();
     }
 
+    /*
+     * Envía datos de película al cliente a través del socket proporcionado.
+     * @param clientSocket Socket del cliente al que se enviarán los datos de la película.
+     * @param httpConnection Instancia deL HTTPConnection utilizada para la conexión con la API.
+     * @param title Título de la película de la que se desea recuperar los datos.
+     * @throws IOException Si hay algún error de entrada/salida durante la ejecución.
+     */
     public void getMovieData(Socket clientSocket, HTTPConnection httpConnection, String title) throws IOException{
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 
